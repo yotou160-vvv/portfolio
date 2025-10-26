@@ -1,0 +1,92 @@
+<!DOCTYPE html>   
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery — Your Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Load Grape Nuts font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Grape+Nuts&display=swap" rel="stylesheet">
+
+  <style>
+    .font-grape {
+      font-family: "Grape Nuts", cursive;
+    }
+
+    /* Fade-in animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 0.7s ease-out forwards;
+    }
+    .fade-in-delay-1 { animation-delay: 0.2s; }
+    .fade-in-delay-2 { animation-delay: 0.4s; }
+    .fade-in-delay-3 { animation-delay: 0.6s; }
+
+    /* Hero text shadow */
+    .hero-heading {
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+    }
+    .hero-paragraph {
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+    }
+
+    /* Video overlay for darkening & soft bottom fade */
+    .video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(4, 3, 3, 0.8) 30%, rgba(0,0,0,0.25) 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="bg-white text-black font-sans relative">
+
+  <!-- Fullscreen looping video background -->
+  <video autoplay muted loop playsinline class="absolute top-0 left-0 w-full h-full object-cover -z-10 brightness-[0.85]">
+    <source src="images/myvideo.mp4" type="video/mp4">
+    <source src="images/myvideo.webm" type="video/webm">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Overlay for contrast + soft fade -->
+  <div class="video-overlay"></div>
+
+  <!-- Navigation bar -->
+  <header class="flex justify-between items-center py-4 px-6 border-b border-gray-200 fade-in relative z-20 bg-white">
+    <h1 class="text-4xl font-grape">VIOLET Z</h1>
+    <nav>
+      <ul class="flex space-x-6 text-sm">
+        <li><a href="gallery.html" class="hover:underline">Gallery</a></li>
+        <li><a href="filmtv.html" class="hover:underline">Film &amp; TV</a></li>
+        <li><a href="shorts.html" class="hover:underline">Shorts</a></li>
+        <li><a href="about.html" class="hover:underline">About Me</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="flex flex-col items-center text-center justify-start h-screen pt-40 fade-in fade-in-delay-2 relative z-10">
+    <h2 class="text-5xl md:text-6xl font-bold mb-6 text-white hero-heading">
+      Hello, I’m Violet Zhang
+    </h2>
+    <p class="text-lg md:text-xl text-gray-100 max-w-2xl leading-relaxed fade-in fade-in-delay-3 hero-paragraph">
+      Welcome to my portfolio — I love creating light and colors that tell stories.
+    </p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="p-6 text-center text-gray-500 text-sm fade-in fade-in-delay-3 relative z-10">
+    © 2025 Violet Zhang. All Rights Reserved.
+  </footer>
+</body>
+</html>

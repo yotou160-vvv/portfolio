@@ -1,0 +1,187 @@
+<!DOCTYPE html>  
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shorts — VIOLET Z</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+  <!-- Load Grape Nuts font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Grape+Nuts&display=swap" rel="stylesheet">
+
+  <style>
+    .font-grape { font-family: 'Grape Nuts', cursive; }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { opacity: 0; animation: fadeInUp 0.7s ease-out forwards; }
+    .fade-in-delay-1 { animation-delay: 0.2s; }
+    .fade-in-delay-2 { animation-delay: 0.4s; }
+    .fade-in-delay-3 { animation-delay: 0.6s; }
+
+    .short-title {
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: #1a202c;
+      border-bottom: 4px solid #facc15;
+      padding-bottom: 0.5rem;
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards;
+    }
+    .short-title.delay-1 { animation-delay: 0.2s; }
+    .short-title.delay-2 { animation-delay: 0.4s; }
+
+    .film-intro {
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .role-text {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #111;
+      margin-bottom: 0.75rem;
+      line-height: 1.1;
+    }
+
+    .role-label { font-size: 1.3rem; }
+
+    .role-indent {
+      display: block;
+      margin-left: 3.5rem;
+      line-height: 1.5;
+      margin-top: 0.25rem;
+    }
+
+    /* Align Role section with poster top and keep film intro at bottom */
+    .text-block {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-top: 0;
+      height: 100%;
+    }
+
+    .film-intro-container { margin-top: auto; }
+
+    /* Poster fills container proportionally without blank space */
+    .poster-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 24rem;
+      border-radius: 0.5rem;
+      object-fit: cover;
+    }
+
+    /* Mobile fixes: prevent poster clipping and stack grid */
+    @media (max-width: 768px) {
+      .grid {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .grid > div:first-child {
+        width: 100%;
+      }
+
+      .poster-img {
+        max-height: none;
+        object-fit: contain;
+        width: 100%;
+        height: auto;
+      }
+
+      .text-block { min-height: auto; }
+    }
+  </style>
+</head>
+<body class="bg-white text-black font-sans">
+  <header class="flex justify-between items-center p-6 border-b border-gray-200 fade-in">
+    <h1 class="text-4xl font-grape">VIOLET Z</h1>
+    <nav>
+      <ul class="flex space-x-6 text-sm">
+        <li><a href="gallery.html" class="hover:underline">Gallery</a></li>
+        <li><a href="filmtv.html" class="hover:underline">Film &amp; TV</a></li>
+        <li><a href="shorts.html" class="hover:underline font-semibold">Shorts</a></li>
+        <li><a href="about.html" class="hover:underline">About Me</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="p-10 max-w-4xl mx-auto space-y-28">
+    <!-- First Short -->
+    <div class="flex flex-col items-center fade-in fade-in-delay-1">
+      <h3 class="short-title delay-1">UNDER THE BLACK HOLE</h3>
+      <iframe class="w-full h-72 md:h-96 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 mb-12"
+        src="https://www.youtube.com/embed/jEZ0VzmQgto"
+        title="UNDER THE BLACK HOLE" frameborder="0" allowfullscreen>
+      </iframe>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start w-full">
+        <div class="flex justify-start">
+          <img src="images/poster1.jpg" alt="UNDER THE BLACK HOLE Poster" class="poster-img max-h-96">
+        </div>
+
+        <div class="md:col-span-2 flex flex-col text-gray-700 text-justify text-block mt-0">
+          <div>
+            <p class="role-text" style="margin-top:0">
+              <span class="role-label"><strong>Role:</strong></span> Directing, Screenplay Writing, Storyboarding
+              <span class="role-indent">Color Script and Background Design</span>
+              <span class="role-indent">Animation, Poster Design</span>
+            </p>
+          </div>
+          <div class="space-y-3 mt-6 film-intro-container">
+            <p class="film-intro"><strong>Film Introduction:</strong></p>
+            <p class="film-intro">A mysterious black hole appears over the city, and people believe cleaning up a circular object can make it disappear. The main character, a staff member who cleans the circle, trembles inside because he hides the object — a Walkman.</p>
+            <p class="film-intro">This graduate project was completed with my classmates in four months during the COVID-19 pandemic in China. I defined the art style during pre-production and contributed extensively in production, including color scripting, background design, and creating the majority of key poses for the most intense action shots.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Second Short -->
+    <div class="flex flex-col items-center fade-in fade-in-delay-2">
+      <h3 class="short-title delay-2">GO!GET IT</h3>
+      <iframe class="w-full h-72 md:h-96 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 mb-12"
+        src="https://www.youtube.com/embed/V0di8LK-0KU"
+        title="GO!GET IT" frameborder="0" allowfullscreen>
+      </iframe>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch w-full">
+        <div class="flex justify-start">
+          <img src="images/Poster2.png" alt="GO!GET IT Poster" class="poster-img max-h-96">
+        </div>
+
+        <div class="md:col-span-2 flex flex-col text-gray-700 text-justify text-block">
+          <div>
+            <p class="role-text" style="margin-top:0">
+              <span class="role-label"><strong>Role:</strong></span> Directing, Screenplay Writing, Storyboarding
+              <span class="role-indent">Color Script and Background Design</span>
+              <span class="role-indent">Animation, Poster Design</span>
+            </p>
+          </div>
+          <div class="space-y-3 mt-6 film-intro-container">
+            <p class="film-intro"><strong>Film Introduction:</strong></p>
+            <p class="film-intro">This work tells the story of the friendship between the protagonist and her three-legged dog. They were inseparable during childhood, but as the protagonist grew up, they gradually drifted apart. When she finally reflects on their bond, she faces the reality of her dog aging and having only a limited time left.</p>
+            <p class="film-intro">This animated short was completed during COVID with two friends at the Communication University of China. Due to lockdown restrictions, all communication and production were carried out entirely online.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="p-6 text-center text-gray-500 text-sm fade-in fade-in-delay-3">
+    © 2025 VIOLET Z. All Rights Reserved.
+  </footer>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>  
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Film & TV — VIOLET Z</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Grape+Nuts&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/macy/2.5.1/macy.min.js"></script>
+
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeIn {
+      animation: fadeIn 0.7s ease-out forwards;
+    }
+
+    .masonry {
+      margin: 0 auto;
+      max-width: 100%;
+    }
+
+    /* Make placeholder text a natural gray */
+    #passwordInput::placeholder {
+      color: #9ca3af;
+    }
+
+    /* Fade transition for lightbox images */
+    #lightbox-img {
+      transition: opacity 0.4s ease-in-out;
+      opacity: 1;
+    }
+    #lightbox-img.fade-out {
+      opacity: 0;
+    }
+
+    /* Navbar visibility control */
+    #navbar {
+      transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    }
+  </style>
+</head>
+
+<body class="bg-white text-black font-sans">
+
+<header id="navbar" class="fixed top-0 left-0 right-0 z-60 bg-white flex justify-between items-center p-6 border-b border-gray-200 animate-fadeIn">
+  <h1 class="text-4xl" style="font-family: 'Grape Nuts', cursive;">VIOLET Z</h1>
+  <nav>
+    <ul class="flex space-x-6 text-sm">
+      <li><a href="gallery.html" class="hover:underline">Gallery</a></li>
+      <li><a href="filmtv.html" class="hover:underline font-semibold">Film & TV</a></li>
+      <li><a href="shorts.html" class="hover:underline">Shorts</a></li>
+      <li><a href="about.html" class="hover:underline">About Me</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div id="passwordScreen" class="fixed inset-0 bg-white/95 flex flex-col justify-center items-center z-50 animate-fadeIn">
+  <img id="lockIcon" src="images/myloclogo.jpg" alt="Lock Logo" class="w-20 h-20 mb-12 animate-fadeIn">
+  <div id="passwordWrapper" class="flex items-center border border-gray-300 rounded-lg p-2 w-full max-w-xs">
+    <input id="passwordInput" type="password" placeholder="Enter password" class="flex-1 border-none outline-none text-base">
+    <button id="unlockBtn" class="text-gray-500 text-2xl ml-2 cursor-pointer bg-transparent border-none">&#10132;</button>
+  </div>
+</div>
+
+<div id="mainContent" class="hidden animate-fadeIn pt-20">
+  <main class="p-6">
+    <div id="gallery" class="space-y-2">
+      <!-- All 33 images -->
+      <img src="images/film/film1.jpg" alt="Film 1" data-index="0" class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film2.jpg" alt="Film 2" data-index="1" class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film3.png" alt="Film 3" data-index="2" class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film4.jpg"  alt="Film 4"  data-index="3"  class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film5.jpg"  alt="Film 5"  data-index="4"  class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film6.png"  alt="Film 6"  data-index="5"  class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film7.jpg"  alt="Film 7"  data-index="6"  class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film8.jpg"  alt="Film 8"  data-index="7"  class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film9.jpg"  alt="Film 9"  data-index="8"  class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film10.jpg" alt="Film 10" data-index="9"  class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film11.jpg" alt="Film 11" data-index="10" class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film12.jpg" alt="Film 12" data-index="11" class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film13.jpg" alt="Film 13" data-index="12" class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film14.jpg" alt="Film 14" data-index="13" class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film15.png" alt="Film 15" data-index="14" class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film16.jpg" alt="Film 16" data-index="15" class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film17.jpg" alt="Film 17" data-index="16" class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film18.png" alt="Film 18" data-index="17" class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film19.jpg" alt="Film 19" data-index="18" class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film20.png" alt="Film 20" data-index="19" class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film21.png" alt="Film 21" data-index="20" class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film22.jpg" alt="Film 22" data-index="21" class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film23.png" alt="Film 23" data-index="22" class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film24.png" alt="Film 24" data-index="23" class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film25.jpg" alt="Film 25" data-index="24" class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film26.jpg" alt="Film 26" data-index="25" class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film27.png" alt="Film 27" data-index="26" class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film28.png" alt="Film 28" data-index="27" class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film29.png" alt="Film 29" data-index="28" class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film30.png" alt="Film 30" data-index="29" class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film31.png" alt="Film 31" data-index="30" class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film32.png" alt="Film 32" data-index="31" class="block w-full mb-2 cursor-pointer">
+      <img src="images/film/film33.png" alt="Film 33" data-index="32" class="block w-full mb-2 cursor-pointer">
+    </div>
+  </main>
+
+  <footer class="p-6 text-center text-gray-500 text-sm animate-fadeIn">
+    © 2025 Violet Zhang. All Rights Reserved.
+  </footer>
+</div>
+
+<div id="lightbox"
+     class="fixed inset-0 flex justify-center items-center z-70 bg-white/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300"
+     aria-hidden="true" role="dialog">
+
+  <button id="lbClose"
+          class="absolute top-5 right-5 text-4xl text-black bg-transparent border-none cursor-pointer">
+    &times;
+  </button>
+
+  <button id="prevBtn"
+          class="absolute top-1/2 left-6 transform -translate-y-1/2 bg-slate-500/20 text-black text-3xl w-14 h-14 rounded-lg flex items-center justify-center backdrop-blur-md cursor-pointer transition hover:bg-slate-500/40 active:scale-95">
+    &#8249;
+  </button>
+
+  <img id="lightbox-img"
+       src=""
+       alt="Expanded artwork"
+       class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-[80%] max-h-[80%] object-contain shadow-xl">
+
+  <button id="nextBtn"
+          class="absolute top-1/2 right-6 transform -translate-y-1/2 bg-slate-500/20 text-black text-3xl w-14 h-14 rounded-lg flex items-center justify-center backdrop-blur-md cursor-pointer transition hover:bg-slate-500/40 active:scale-95">
+    &#8250;
+  </button>
+</div>
+
+<script>
+const passwordScreen = document.getElementById('passwordScreen');
+const mainContent = document.getElementById('mainContent');
+const unlockBtn = document.getElementById('unlockBtn');
+const passwordInput = document.getElementById('passwordInput');
+const PASSWORD = "123";
+
+unlockBtn.addEventListener('click', () => {
+  if (passwordInput.value === PASSWORD) {
+    passwordScreen.classList.add('hidden');
+    mainContent.classList.remove('hidden');
+    initMacy();
+  } else {
+    alert('Incorrect password!');
+    passwordInput.value = "";
+  }
+});
+passwordInput.addEventListener('keyup', e => { if (e.key === 'Enter') unlockBtn.click(); });
+
+// NAVBAR VISIBILITY ON SCROLL
+const navbar = document.getElementById('navbar');
+const lightbox = document.getElementById('lightbox');
+
+window.addEventListener('scroll', () => {
+  if (lightbox.classList.contains('opacity-100')) {
+    navbar.style.opacity = '0';
+    navbar.style.visibility = 'hidden';
+    return;
+  }
+
+  const currentScroll = window.pageYOffset;
+
+  if (currentScroll > 50) {
+    navbar.style.opacity = '0';
+    navbar.style.visibility = 'hidden';
+  } else if (currentScroll <= 50) {
+    navbar.style.opacity = '1';
+    navbar.style.visibility = 'visible';
+  }
+});
+
+// LIGHTBOX
+const gallery = document.getElementById('gallery');
+const imageNodes = Array.from(gallery.querySelectorAll('img'));
+const lightboxImg = document.getElementById('lightbox-img');
+const lbClose = document.getElementById('lbClose');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+let currentIndex = 0;
+
+imageNodes.forEach((img, i) => {
+  img.addEventListener('click', () => openLightbox(i));
+  img.setAttribute('tabindex', '0');
+});
+
+function openLightbox(i) {
+  currentIndex = i;
+  lightbox.classList.add('opacity-100', 'pointer-events-auto');
+  lightbox.classList.remove('pointer-events-none');
+  document.body.style.overflow = 'hidden';
+  showImage(currentIndex);
+  preloadAdjacentImages();
+  navbar.style.opacity = '0';
+  navbar.style.visibility = 'hidden';
+}
+
+function showImage(index) {
+  lightboxImg.classList.add('fade-out');
+  setTimeout(() => {
+    lightboxImg.src = imageNodes[index].src;
+    lightboxImg.onload = () => lightboxImg.classList.remove('fade-out');
+  }, 200);
+}
+
+function changeImage(step) {
+  currentIndex = (currentIndex + step + imageNodes.length) % imageNodes.length;
+  showImage(currentIndex);
+  preloadAdjacentImages();
+}
+
+function preloadAdjacentImages() {
+  const nextIndex = (currentIndex + 1) % imageNodes.length;
+  const prevIndex = (currentIndex - 1 + imageNodes.length) % imageNodes.length;
+  [nextIndex, prevIndex].forEach(i => {
+    const img = new Image();
+    img.src = imageNodes[i].src;
+  });
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('opacity-100', 'pointer-events-auto');
+  lightbox.classList.add('pointer-events-none');
+  document.body.style.overflow = 'auto';
+  // restore navbar visibility
+  if (window.pageYOffset <= 50) {
+    navbar.style.opacity = '1';
+    navbar.style.visibility = 'visible';
+  }
+}
+
+lbClose.addEventListener('click', closeLightbox);
+prevBtn.addEventListener('click', () => changeImage(-1));
+nextBtn.addEventListener('click', () => changeImage(1));
+
+document.addEventListener('keydown', e => {
+  if (!lightbox.classList.contains('opacity-100')) return;
+  if (e.key === "ArrowLeft") changeImage(-1);
+  if (e.key === "ArrowRight") changeImage(1);
+  if (e.key === "Escape") closeLightbox();
+});
+
+// MACY
+function initMacy() {
+  Macy({
+    container: '#gallery',
+    trueOrder: true,
+    waitForImages: true,
+    margin: 16,
+    columns: 3,
+    breakAt: { 1024: 2, 640: 1 }
+  });
+}
+</script>
+</body>
+</html>
