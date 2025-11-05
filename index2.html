@@ -1,0 +1,144 @@
+<!DOCTYPE html>      
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery — Your Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  
+  <!-- Load Kodchasan + Poppins fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kodchasan:wght@600;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    /* === Fonts === */
+    .font-kodchasan-bold {
+      font-family: "Kodchasan", sans-serif;
+      font-weight: 700;
+    }
+    .font-kodchasan-semibold {
+      font-family: "Kodchasan", sans-serif;
+      font-weight: 600;
+    }
+    .font-poppins-light {
+      font-family: "Poppins", sans-serif;
+      font-weight: 300;
+    }
+    .font-poppins-regular {
+      font-family: "Poppins", sans-serif;
+      font-weight: 400;
+    }
+
+    /* === Animations === */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 0.7s ease-out forwards;
+    }
+    .fade-in-delay-1 { animation-delay: 0.2s; }
+    .fade-in-delay-2 { animation-delay: 0.4s; }
+    .fade-in-delay-3 { animation-delay: 0.6s; }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .slide-up { opacity: 0; animation: slideUp 0.7s ease-out forwards; }
+    .slide-up-delay-1 { animation-delay: 0.2s; }
+
+    /* === Hero Text Shadow === */
+    .hero-heading {
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+    }
+    .hero-paragraph {
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+    }
+
+    /* === Video Overlay (darkest at bottom, lighter at top) === */
+    .video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(4,3,3,0.9) 0%, rgba(0,0,0,0.25) 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* === Custom lime-50 (for Tailwind v2) === */
+    .bg-lime-50 {
+      background: linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(251, 255, 248, 0.8));
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(200, 230, 180, 0.3);
+    }
+  </style>
+</head>
+
+<body class="bg-white text-black relative font-poppins-regular">
+
+  <!-- Background video -->
+  <video autoplay muted loop playsinline 
+        class="absolute top-16 left-0 w-full h-screen object-cover z-[-1] brightness-[0.50]">
+      <source src="images/myvideo.mp4" type="video/mp4">
+      <source src="images/myvideo.webm" type="video/webm">
+      Your browser does not support the video tag.
+  </video>
+
+  <div class="video-overlay"></div>
+
+  <!-- Navigation bar -->
+  <header class="fixed top-0 left-0 w-full py-4 px-6 bg-lime-50 border-b border-green-200 z-20 backdrop-blur-sm">
+    <div class="flex justify-between items-center slide-up slide-up-delay-1">
+      <h1 class="text-2xl md:text-3xl font-kodchasan-bold">
+        <a href="index.html" class="no-underline">VIOLET Z</a>
+      </h1>
+
+      <!-- Mobile menu button -->
+      <button id="menu-btn" class="md:hidden text-2xl focus:outline-none">☰</button>
+
+      <!-- Nav links -->
+      <nav id="menu" class="hidden md:block">
+        <ul class="flex flex-col md:flex-row md:space-x-6 text-sm font-kodchasan-semibold 
+                   bg-lime-50 md:bg-transparent absolute md:static top-14 left-0 w-full md:w-auto 
+                   p-4 md:p-0 shadow-none">
+          <li><a href="gallery.html" class="block py-2 hover:underline">Gallery</a></li>
+          <li><a href="filmtv.html" class="block py-2 hover:underline">Film &amp; TV</a></li>
+          <li><a href="shorts.html" class="block py-2 hover:underline">Shorts</a></li>
+          <li><a href="about.html" class="block py-2 hover:underline">About Me</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <script>
+    // Toggle mobile nav
+    document.getElementById('menu-btn').addEventListener('click', () => {
+      document.getElementById('menu').classList.toggle('hidden');
+    });
+  </script>
+
+  <!-- Hero -->
+  <section class="flex flex-col items-center text-center justify-center h-[90vh] pt-32 md:pt-56 px-4 fade-in fade-in-delay-2 relative z-10">
+    <h2 class="text-3xl md:text-5xl mb-6 text-white hero-heading font-kodchasan-bold">
+      Hello, I’m Violet Zhang
+    </h2>
+    <p class="text-lg md:text-xl text-gray-100 max-w-2xl leading-relaxed fade-in fade-in-delay-3 hero-paragraph font-kodchasan-semibold">
+      Welcome to my portfolio
+    </p>
+    <p class="text-lg md:text-xl text-gray-100 max-w-2xl leading-relaxed mt-2 fade-in fade-in-delay-3 hero-paragraph font-kodchasan-semibold">
+      I love creating light and colors that tell stories.
+    </p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="p-6 text-center text-gray-500 text-sm fade-in fade-in-delay-3 relative z-10 font-poppins-light">
+    © 2025 Violet Zhang. All Rights Reserved.
+  </footer>
+
+</body>
+</html>

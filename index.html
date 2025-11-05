@@ -1,92 +1,119 @@
-<!DOCTYPE html>   
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gallery — Your Portfolio</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <!-- Load Grape Nuts font -->
+
+  <!-- Tailwind -->
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Grape+Nuts&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kodchasan:wght@500;600;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
-  <style>
-    .font-grape {
-      font-family: "Grape Nuts", cursive;
+  <!-- Tailwind Config -->
+  <!-- 先放 config（全局变量），CDN 加载时会读取 -->
+  <script>
+    window.tailwind = {
+      config: {
+        theme: {
+          extend: {
+            fontFamily: {
+              kodchasan: ['Kodchasan', 'sans-serif'],
+              poppins: ['Poppins', 'sans-serif'],
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              slideUp: {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+            },
+            animation: {
+              'fade-in': 'fadeIn 0.7s ease-out forwards',
+              'slide-up': 'slideUp 0.7s ease-out forwards',
+            },
+            boxShadow: {
+              'hero-text': '2px 2px 6px rgba(0,0,0,0.6)',
+              'hero-p': '1px 1px 4px rgba(0,0,0,0.5)',
+            },
+          },
+        },
+      }
     }
+  </script>
 
-    /* Fade-in animation */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .fade-in {
-      opacity: 0;
-      animation: fadeIn 0.7s ease-out forwards;
-    }
-    .fade-in-delay-1 { animation-delay: 0.2s; }
-    .fade-in-delay-2 { animation-delay: 0.4s; }
-    .fade-in-delay-3 { animation-delay: 0.6s; }
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-    /* Hero text shadow */
-    .hero-heading {
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
-    }
-    .hero-paragraph {
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
-    }
-
-    /* Video overlay for darkening & soft bottom fade */
-    .video-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to top, rgba(4, 3, 3, 0.8) 30%, rgba(0,0,0,0.25) 100%);
-      z-index: 1;
-      pointer-events: none;
-    }
-  </style>
 </head>
-<body class="bg-white text-black font-sans relative">
 
-  <!-- Fullscreen looping video background -->
-  <video autoplay muted loop playsinline class="absolute top-0 left-0 w-full h-full object-cover -z-10 brightness-[0.85]">
+<body class="bg-white text-black relative font-poppins">
+
+  <!-- Background video -->
+<video autoplay muted loop playsinline
+    class="fixed top-[10%] left-0 w-full h-[calc(100vh-4rem)] object-cover object-top -z-10">
     <source src="images/myvideo.mp4" type="video/mp4">
     <source src="images/myvideo.webm" type="video/webm">
     Your browser does not support the video tag.
-  </video>
+</video>
 
-  <!-- Overlay for contrast + soft fade -->
-  <div class="video-overlay"></div>
+  <!-- Video overlay -->
+  <div class="fixed top-[10%] left-0 w-full h-[calc(100vh-4rem)] bg-gradient-to-t from-[rgba(4,3,3,0.93)] via-[rgba(4,3,3,0.8)] to-[rgba(0,0,0,0.06)] -z-0 pointer-events-none"></div>
 
   <!-- Navigation bar -->
-  <header class="flex justify-between items-center py-4 px-6 border-b border-gray-200 fade-in relative z-20 bg-white">
-    <h1 class="text-4xl font-grape">VIOLET Z</h1>
-    <nav>
-      <ul class="flex space-x-6 text-sm">
-        <li><a href="gallery.html" class="hover:underline">Gallery</a></li>
-        <li><a href="filmtv.html" class="hover:underline">Film &amp; TV</a></li>
-        <li><a href="shorts.html" class="hover:underline">Shorts</a></li>
-        <li><a href="about.html" class="hover:underline">About Me</a></li>
-      </ul>
-    </nav>
+  <header class="fixed h-[10%] top-0 left-0 w-full py-4 px-6 z-20 bg-gradient-to-r from-white/80 to-[#fbfff8cc] backdrop-blur-md border-b border-green-200">
+    <div class="flex justify-between items-center animate-slide-up [animation-delay:0.2s]">
+      <h1 class="text-2xl md:text-3xl font-kodchasan font-bold">
+        <a href="index.html" class="no-underline">VIOLET Z</a>
+      </h1>
+
+      <!-- Mobile menu button -->
+      <button id="menu-btn" class="md:hidden text-2xl focus:outline-none">☰</button>
+
+      <!-- Nav links -->
+      <nav id="menu" class="hidden md:block absolute md:static right-6 top-16 md:top-0 bg-white/85 md:bg-transparent backdrop-blur-md md:backdrop-blur-none rounded-lg md:rounded-none shadow-lg md:shadow-none p-4 md:p-0 z-30">
+        <ul class="flex flex-col md:flex-row md:space-x-6 text-sm font-kodchasan font-medium">
+          <li><a href="gallery.html" class="block py-2 px-3 rounded-md hover:bg-green-50 hover:underline">Gallery</a></li>
+          <li><a href="filmtv.html" class="block py-2 px-3 rounded-md hover:bg-green-50 hover:underline">Film &amp; TV</a></li>
+          <li><a href="shorts.html" class="block py-2 px-3 rounded-md hover:bg-green-50 hover:underline">Shorts</a></li>
+          <li><a href="about.html" class="block py-2 px-3 rounded-md hover:bg-green-50 hover:underline">About me</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
+  <!-- JS for Mobile Dropdown -->
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const menu = document.getElementById('menu');
+
+    menuBtn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+      menu.classList.toggle('animate-fade-in');
+    });
+  </script>
+
   <!-- Hero -->
-  <section class="flex flex-col items-center text-center justify-start h-screen pt-40 fade-in fade-in-delay-2 relative z-10">
-    <h2 class="text-5xl md:text-6xl font-bold mb-6 text-white hero-heading">
+  <section class="flex flex-col items-center text-center justify-center h-[90vh] pt-32 md:pt-0 px-4 relative z-10 animate-fade-in [animation-delay:0.4s]">
+    <h2 class="text-3xl md:text-5xl mb-6 text-white font-kodchasan font-bold drop-shadow-[2px_2px_6px_rgba(0,0,0,0.6)]">
       Hello, I’m Violet Zhang
     </h2>
-    <p class="text-lg md:text-xl text-gray-100 max-w-2xl leading-relaxed fade-in fade-in-delay-3 hero-paragraph">
-      Welcome to my portfolio — I love creating light and colors that tell stories.
+    <p class="text-lg md:text-xl text-gray-100 max-w-2xl leading-relaxed font-kodchasan font-semibold drop-shadow-[1px_1px_4px_rgba(0,0,0,0.5)] animate-fade-in [animation-delay:0.6s]">
+      Welcome to my portfolio
+    </p>
+    <p class="text-lg md:text-xl text-gray-100 max-w-2xl leading-relaxed mt-2 font-kodchasan font-semibold drop-shadow-[1px_1px_4px_rgba(0,0,0,0.5)] animate-fade-in [animation-delay:0.8s]">
+      I love creating light and colors that tell stories.
     </p>
   </section>
 
   <!-- Footer -->
-  <footer class="p-6 text-center text-gray-500 text-sm fade-in fade-in-delay-3 relative z-10">
+  <footer class="p-6 text-center text-gray-500 text-sm relative z-10 font-poppins font-light animate-fade-in [animation-delay:1s]">
     © 2025 Violet Zhang. All Rights Reserved.
   </footer>
+
 </body>
 </html>
