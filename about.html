@@ -34,16 +34,26 @@
 <body class="bg-white text-black font-sans">
 
   <!-- Header -->
-  <header class="flex justify-between items-center p-6 border-b border-gray-200 fade-in">
-    <h1 class="text-4xl font-grape">VIOLET Z</h1>
-    <nav>
-      <ul class="flex space-x-6 text-sm">
-        <li><a href="gallery.html" class="hover:underline">Gallery</a></li>
-        <li><a href="filmtv.html" class="hover:underline">Film &amp; TV</a></li>
-        <li><a href="shorts.html" class="hover:underline">Shorts</a></li>
-        <li><a href="about.html" class="hover:underline font-semibold">About Me</a></li>
-      </ul>
-    </nav>
+
+<header class="fixed h-[12%] top-0 left-0 w-full py-4 px-6 z-20 bg-white backdrop-blur-md">
+    <div class="flex justify-between items-center animate-slide-up [animation-delay:0.2s]">
+      <h1 class="text-2xl md:text-3xl font-kodchasan font-bold">
+        <a href="index.html" class="no-underline">VIOLET Z</a>
+      </h1>
+
+      <!-- Mobile menu button -->
+      <button id="menu-btn" class="md:hidden text-2xl focus:outline-none">☰</button>
+
+      <!-- Nav links -->
+      <nav id="menu" class="border border-1 border-black hidden md:block absolute md:static right-6 top-16 md:top-0 bg-white md:bg-transparent backdrop-blur-md md:backdrop-blur-none rounded-lg md:rounded-none shadow-lg md:shadow-none p-4 md:p-0 z-30">
+        <ul class="flex flex-col md:flex-row md:space-x-6 text-sm font-kodchasan font-medium">
+          <li><a href="gallery.html" class="block py-2 px-3 rounded-md hover:bg-green-50 hover:underline">Gallery</a></li>
+          <li><a href="filmtv.html" class="block py-2 px-3 rounded-md hover:bg-green-50 hover:underline">Film &amp; TV</a></li>
+          <li><a href="shorts.html" class="block py-2 px-3 rounded-md hover:bg-green-50 hover:underline">Shorts</a></li>
+          <li><a href="about.html" class="block py-2 px-3 rounded-md hover:bg-green-50 hover:underline">About me</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <!-- About Me -->
@@ -116,5 +126,14 @@
   <footer class="p-6 text-center text-gray-500 text-sm fade-in fade-in-delay-3">
     © 2025 VIOLET Z. All Rights Reserved.
   </footer>
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const menu = document.getElementById('menu');
+
+    menuBtn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+      menu.classList.toggle('animate-fade-in');
+    });
+  </script>
 </body>
 </html>
