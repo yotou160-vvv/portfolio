@@ -4,103 +4,120 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gallery — VIOLET Z</title>
+
+  <!-- Tailwind CSS -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <!-- Load Grape Nuts font -->
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Grape+Nuts&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Kodchasan:wght@600;700&display=swap" as="style">
+  <link href="https://fonts.googleapis.com/css2?family=Kodchasan:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Macy.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/macy/2.5.1/macy.min.js"></script>
+
   <style>
-    .font-grape { 
-      font-family: "Grape Nuts", cursive; 
-      visibility: hidden; /* hide initially to prevent flash */
-    }
+    /* Fonts */
+    .font-grape { font-family: "Grape Nuts", cursive; visibility: hidden; }
+    .font-kodchasan-bold { font-family: "Kodchasan", sans-serif; font-weight: 700; }
+    .font-kodchasan-semibold { font-family: "Kodchasan", sans-serif; font-weight: 600; }
+    .font-kodchasan-light { font-family: "Kodchasan", sans-serif; font-weight: 300; }
 
-    .masonry {
-      margin: 0 auto;
-      max-width: 100%;
-    }
+    /* Fade-in animation */
+    @keyframes fadeIn { from {opacity:0; transform:translateY(20px);} to {opacity:1; transform:translateY(0);} }
+    .fade-in { opacity:0; animation:fadeIn 0.7s ease-out forwards; }
+    .fade-in-delay-1 { animation-delay:0.2s; }
+    .fade-in-delay-2 { animation-delay:0.4s; }
+    .fade-in-delay-3 { animation-delay:0.6s; }
+    .fade-in-delay-4 { animation-delay:0.8s; }
 
-    .masonry img {
-      box-sizing: border-box;
+    /* Slide animations */
+    @keyframes slideUp { from {opacity:0; transform:translateY(20px);} to {opacity:1; transform:translateY(0);} }
+    @keyframes slideDown { from {opacity:0; transform:translateY(-20px);} to {opacity:1; transform:translateY(0);} }
+    .slide-up { opacity:0; animation:slideUp 0.2s ease-out forwards; }
+    .animate-slide-down { animation:slideDown 0.5s ease-out forwards; }
+
+    /* Navbar link hover underline */
+    nav ul li a {
+      transition: color 0.3s ease;
+      color: #000;
+      position: relative;
+      display: inline-block;
+      padding: 0.5rem 0.75rem;
     }
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: -2px;
+      width: 0;
+      height: 3px;
+      background-color: #555;
+      transform: translateX(-50%);
+      transition: width 0.3s ease;
+    }
+    nav ul li a:hover { color: #555; }
+    nav ul li a:hover::after { width: 100%; }
+
+        /* Header boundary */
+    header {
+      box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+     }
+
+    /* Masonry */
+    .masonry { margin: 0 auto; max-width:100%; }
+    .masonry img { box-sizing: border-box; }
 
     /* Lightbox nav buttons */
     .lb-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(255,255,255,0.2);
-      color: black;
-      border: none;
-      font-size: 2.2rem;
-      width: 56px;
-      height: 56px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      backdrop-filter: blur(6px);
-      transition: background 0.3s ease;
+      position: absolute; top:50%; transform:translateY(-50%);
+      background: rgba(255,255,255,0.2); color:black; border:none;
+      font-size:2.2rem; width:56px; height:56px; border-radius:8px;
+      display:flex; align-items:center; justify-content:center; cursor:pointer;
+      backdrop-filter: blur(6px); transition: background 0.3s ease;
     }
     .lb-btn:hover { background: rgba(255,255,255,0.4); }
     .lb-btn:active { transform: translateY(-50%) scale(0.98); }
-    .lb-prev { left: 24px; }
-    .lb-next { right: 24px; }
+    .lb-prev { left:24px; }
+    .lb-next { right:24px; }
 
     /* Close button */
-    .lb-close {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      font-size: 2.4rem;
-      color: black;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-    }
+    .lb-close { position:absolute; top:20px; right:20px; font-size:2.4rem; color:black; background:transparent; border:none; cursor:pointer; }
 
-    /* Lightbox adjustments */
+    /* Lightbox container */
     #lightbox {
-      padding: 1rem;
-      background: rgba(255, 255, 255, 0.85);
+      padding:1rem;
+      background: rgba(255,255,255,0.85);
       backdrop-filter: blur(12px);
       animation: fadeInLightbox 0.4s ease-in-out forwards;
     }
     #lightbox-img {
-      max-height: 90%;
-      max-width: 90%;
-      object-fit: contain;
-      border-radius: 0;
-      box-shadow: 0 0 20px rgba(0,0,0,0.2);
-      opacity: 0;
-      transition: opacity 0.4s ease;
+      max-height:90%; max-width:90%; object-fit:contain;
+      border-radius:0; box-shadow:0 0 20px rgba(0,0,0,0.2);
+      opacity:0; transition: opacity 0.4s ease;
     }
-    #lightbox-img.visible { opacity: 1; }
+    #lightbox-img.visible { opacity:1; }
 
-    @keyframes fadeInLightbox {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+    @keyframes fadeInLightbox { from{opacity:0;} to{opacity:1;} }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* Mobile menu styling */
+    @media (max-width: 767px) {
+      #menu { text-align:right; }
+      #menu ul { display:flex; flex-direction:column; gap:0.5rem; }
+      #menu ul li a { display:block; text-align:right; font-size:1.1rem; padding:0.75rem 1rem; }
     }
-    .fade-in { opacity: 0; animation: fadeIn 0.7s ease-out forwards; }
-    .fade-in-delay-1 { animation-delay: 0.2s; }
-    .fade-in-delay-2 { animation-delay: 0.4s; }
-    .fade-in-delay-3 { animation-delay: 0.6s; }
-    .fade-in-delay-4 { animation-delay: 0.8s; }
   </style>
 </head>
-<body class="bg-amber-50 text-black font-sans">
 
-  <!-- Header -->
- <header class="fixed h-[12%] top-0 left-0 w-full py-4 px-6 z-20 bg-white backdrop-blur-md">
-    <div class="flex justify-between items-center animate-slide-up [animation-delay:0.2s]">
-      <h1 class="text-2xl md:text-3xl font-kodchasan font-bold">
+<body class="bg-amber-50 text-black font-sans" style="visibility:hidden;">
+
+  <!-- Header / Navbar -->
+  <header id="site-header" class="fixed h-[10%] top-0 left-0 w-full py-4 px-6 z-20 bg-white backdrop-blur-md">
+    <div class="flex justify-between items-center">
+      <h1 class="text-2xl md:text-3xl font-kodchasan-bold">
         <a href="index.html" class="no-underline">VIOLET Z</a>
       </h1>
 
@@ -108,18 +125,19 @@
       <button id="menu-btn" class="md:hidden text-2xl focus:outline-none">☰</button>
 
       <!-- Nav links -->
-      <nav id="menu" class="border border-1 border-black hidden md:block absolute md:static right-6 top-16 md:top-0 bg-white md:bg-transparent backdrop-blur-md md:backdrop-blur-none rounded-lg md:rounded-none shadow-lg md:shadow-none p-4 md:p-0 z-30">
-        <ul class="flex flex-col md:flex-row md:space-x-6 text-sm font-kodchasan font-medium">
-          <li><a href="gallery.html" class="block py-2 px-3 rounded-md hover:bg-green-50 hover:underline">Gallery</a></li>
-          <li><a href="filmtv.html" class="block py-2 px-3 rounded-md hover:bg-green-50 hover:underline">Film &amp; TV</a></li>
-          <li><a href="shorts.html" class="block py-2 px-3 rounded-md hover:bg-green-50 hover:underline">Shorts</a></li>
-          <li><a href="about.html" class="block py-2 px-3 rounded-md hover:bg-green-50 hover:underline">About me</a></li>
+      <nav id="menu" class="hidden md:block absolute md:static right-6 top-16 md:top-0 bg-white md:bg-transparent backdrop-blur-md md:backdrop-blur-none rounded-lg md:rounded-none shadow-lg md:shadow-none p-4 md:p-0 z-30">
+        <ul class="flex flex-col md:flex-row md:space-x-6 text-sm font-kodchasan-semibold">
+          <li><a href="gallery.html" class="focus:outline-none">Gallery</a></li>
+          <li><a href="filmtv.html" class="focus:outline-none">Film &amp; TV</a></li>
+          <li><a href="shorts.html" class="focus:outline-none">Shorts</a></li>
+          <li><a href="about.html" class="focus:outline-none">About me</a></li>
         </ul>
       </nav>
     </div>
   </header>
-  <!-- Masonry Gallery -->
-  <main class="md:p-6 mt-20">
+
+  <!-- MAIN CONTENT -->
+  <main id="main-content" class="md:p-6">
     <div id="gallery" class="masonry fade-in fade-in-delay-2">
       <img src="images/gallery/gallery1.png" alt="Artwork 1" class="shadow-md cursor-pointer" data-index="0">
       <img src="images/gallery/gallery2.jpg" alt="Artwork 2" class="shadow-md cursor-pointer" data-index="1">
@@ -150,31 +168,34 @@
 
   <!-- Scripts -->
   <script>
-    // Font load fix
+    // Mobile menu toggle
     const menuBtn = document.getElementById('menu-btn');
     const menu = document.getElementById('menu');
-
     menuBtn.addEventListener('click', () => {
-      menu.classList.toggle('hidden');      // 切换显示/隐藏
-      menu.classList.toggle('animate-fade-in'); // 切换动画
+      menu.classList.toggle('hidden');
+      if (!menu.classList.contains('hidden')) {
+        menu.classList.remove('animate-slide-down');
+        void menu.offsetWidth;
+        menu.classList.add('animate-slide-down');
+
+        const links = menu.querySelectorAll('a');
+        links.forEach((link, i) => {
+          link.classList.remove('slide-up');
+          void link.offsetWidth;
+          link.style.animationDelay = `${0.1 * i}s`;
+          link.classList.add('slide-up');
+        });
+      }
+      updateMainPadding();
     });
 
-    document.fonts.load('1em "Grape Nuts"').then(() => {
-      document.querySelectorAll('.font-grape').forEach(el => {
-        el.style.visibility = 'visible';
-      });
-    });
+    // Font visibility fixes
+    document.fonts.load('1em "Kodchasan"').then(() => { document.body.style.visibility='visible'; });
+    document.fonts.load('1em "Grape Nuts"').then(() => { document.querySelectorAll('.font-grape').forEach(el=>el.style.visibility='visible'); });
 
     // Masonry Gallery
     document.addEventListener("DOMContentLoaded", function () {
-      Macy({
-        container: '#gallery',
-        trueOrder: true,
-        waitForImages: true,
-        margin: 16,
-        columns: 3,
-        breakAt: { 1024:2, 640:1 }
-      });
+      Macy({ container:'#gallery', trueOrder:true, waitForImages:true, margin:16, columns:3, breakAt:{1024:2, 640:1} });
     });
 
     // Lightbox
@@ -192,35 +213,30 @@
       img.setAttribute('tabindex', '0');
     });
 
-    function openLightbox(i) {
-      currentIndex = i;
-      showImage(i);
-      lightbox.classList.remove('hidden');
+    function openLightbox(i) { currentIndex=i; showImage(i); lightbox.classList.remove('hidden'); }
+    function showImage(index) { lightboxImg.classList.remove('visible'); setTimeout(()=>{ lightboxImg.src=imageNodes[index].src; lightboxImg.onload=()=>lightboxImg.classList.add('visible'); },100);}
+    lbClose.addEventListener('click',()=>lightbox.classList.add('hidden'));
+    prevBtn.addEventListener('click',()=>changeImage(-1));
+    nextBtn.addEventListener('click',()=>changeImage(1));
+    function changeImage(step){ currentIndex=(currentIndex+step+imageNodes.length)%imageNodes.length; showImage(currentIndex);}
+    document.addEventListener('keydown',(e)=>{ if(lightbox.classList.contains('hidden')) return; if(e.key==="ArrowLeft") changeImage(-1); if(e.key==="ArrowRight") changeImage(1); if(e.key==="Escape") lightbox.classList.add('hidden'); });
+
+    // DYNAMIC MAIN PADDING BASED ON HEADER
+    const main = document.getElementById('main-content');
+    const header = document.getElementById('site-header');
+    function updateMainPadding() {
+      const headerHeight = header.offsetHeight;
+      main.style.paddingTop = headerHeight + 'px';
     }
-
-    function showImage(index) {
-      lightboxImg.classList.remove('visible');
-      setTimeout(() => {
-        lightboxImg.src = imageNodes[index].src;
-        lightboxImg.onload = () => lightboxImg.classList.add('visible');
-      }, 100);
-    }
-
-    lbClose.addEventListener('click', () => lightbox.classList.add('hidden'));
-    prevBtn.addEventListener('click', () => changeImage(-1));
-    nextBtn.addEventListener('click', () => changeImage(1));
-
-    function changeImage(step) {
-      currentIndex = (currentIndex + step + imageNodes.length) % imageNodes.length;
-      showImage(currentIndex);
-    }
-
-    document.addEventListener('keydown', (e) => {
-      if (lightbox.classList.contains('hidden')) return;
-      if (e.key === "ArrowLeft") changeImage(-1);
-      if (e.key === "ArrowRight") changeImage(1);
-      if (e.key === "Escape") lightbox.classList.add('hidden');
+    window.addEventListener('load', updateMainPadding);
+    window.addEventListener('resize', updateMainPadding);
+  </script>
+  
+  <script>
+    document.fonts.ready.then(() => {
+      document.body.style.visibility = 'visible';
     });
   </script>
+
 </body>
 </html>

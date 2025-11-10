@@ -4,112 +4,104 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shorts — VIOLET Z</title>
+
+  <!-- Tailwind CSS -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
-  <!-- Load Grape Nuts font -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Grape+Nuts&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Kodchasan:wght@600;700&display=swap" as="style">
+  <link href="https://fonts.googleapis.com/css2?family=Kodchasan:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
-    .font-grape { font-family: 'Grape Nuts', cursive; }
+    /* Fonts */
+    .font-grape { font-family: "Grape Nuts", cursive; visibility: hidden; }
+    .font-kodchasan-bold { font-family: "Kodchasan", sans-serif; font-weight: 700; }
+    .font-kodchasan-semibold { font-family: "Kodchasan", sans-serif; font-weight: 600; }
+    .font-kodchasan-light { font-family: "Kodchasan", sans-serif; font-weight: 300; }
+    .font-prompt-light { font-family: "Prompt", sans-serif; font-weight: 300; }
 
+    body { font-family: "Kodchasan", sans-serif; }
+
+    /* Fade-in animation */
+    @keyframes fadeIn { from {opacity:0; transform:translateY(20px);} to {opacity:1; transform:translateY(0);} }
+    .fade-in { opacity:0; animation:fadeIn 0.7s ease-out forwards; }
+    .fade-in-delay-1 { animation-delay:0.2s; }
+    .fade-in-delay-2 { animation-delay:0.4s; }
+    .fade-in-delay-3 { animation-delay:0.6s; }
+
+    /* Slide animations */
+    @keyframes slideUp { from {opacity:0; transform:translateY(20px);} to {opacity:1; transform:translateY(0);} }
+    @keyframes slideDown { from {opacity:0; transform:translateY(-20px);} to {opacity:1; transform:translateY(0);} }
+    .slide-up { opacity:0; animation:slideUp 0.2s ease-out forwards; }
+    .animate-slide-down { animation:slideDown 0.5s ease-out forwards; }
+
+    /* Navbar link hover underline */
+    nav ul li a {
+      transition: color 0.3s ease;
+      color: #000;
+      position: relative;
+      display: inline-block;
+      padding: 0.5rem 0.75rem;
+    }
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: -6px;
+      width: 0;
+      height: 3px;
+      background-color: #555;
+      transform: translateX(-50%);
+      transition: width 0.3s ease;
+    }
+    nav ul li a:hover { color: #555; }
+    nav ul li a:hover::after { width: 100%; }
+
+        /* Header boundary */
+    header {
+      box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+     }
+
+    /* Social icon container */
+    .social-icons a { transition: color 0.3s ease; color: black; }
+    .social-icons a:hover { color: gray; }
+
+    /* Shorts page custom styles */
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    .fade-in { opacity: 0; animation: fadeInUp 0.7s ease-out forwards; }
-    .fade-in-delay-1 { animation-delay: 0.2s; }
-    .fade-in-delay-2 { animation-delay: 0.4s; }
-    .fade-in-delay-3 { animation-delay: 0.6s; }
-
-    .short-title {
-      font-size: 2.25rem;
-      font-weight: 700;
-      color: #1a202c;
-      border-bottom: 4px solid #facc15;
-      padding-bottom: 0.5rem;
-      margin-bottom: 2rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      opacity: 0;
-      animation: fadeInUp 1s ease forwards;
-    }
+    .short-title { font-size: 2.25rem; font-weight: 700; color: #1a202c; border-bottom: 4px solid #ffa793; padding-bottom: 0.5rem; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0; animation: fadeInUp 1s ease forwards; }
     .short-title.delay-1 { animation-delay: 0.2s; }
     .short-title.delay-2 { animation-delay: 0.4s; }
 
-    .film-intro {
-      font-size: 0.9rem;
-      color: #555;
-      line-height: 1.6;
-    }
-
-    .role-text {
-      font-size: 1.15rem;
-      font-weight: 600;
-      color: #111;
-      margin-bottom: 0.75rem;
-      line-height: 1.1;
-    }
-
+    .film-intro { font-size: 0.9rem; color: #2a2a2a; line-height: 1.6; }
+    .role-text { font-size: 1.15rem; font-weight: 600; color: #111; margin-bottom: 0.75rem; line-height: 1.1; }
     .role-label { font-size: 1.3rem; }
-
-    .role-indent {
-      display: block;
-      margin-left: 3.5rem;
-      line-height: 1.5;
-      margin-top: 0.25rem;
-    }
-
-    /* Align Role section with poster top and keep film intro at bottom */
-    .text-block {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      margin-top: 0;
-      height: 100%;
-    }
-
+    .role-indent { display: block; margin-left: 3.5rem; line-height: 1.5; margin-top: 0.25rem; }
+    .text-block { display: flex; flex-direction: column; justify-content: space-between; margin-top: 0; height: 100%; }
     .film-intro-container { margin-top: auto; }
+    .poster-img { display: block; width: 100%; height: auto; max-height: 24rem; border-radius: 0.5rem; object-fit: cover; }
 
-    /* Poster fills container proportionally without blank space */
-    .poster-img {
-      display: block;
-      width: 100%;
-      height: auto;
-      max-height: 24rem;
-      border-radius: 0.5rem;
-      object-fit: cover;
-    }
-
-    /* Mobile fixes: prevent poster clipping and stack grid */
     @media (max-width: 768px) {
-      .grid {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .grid > div:first-child {
-        width: 100%;
-      }
-
-      .poster-img {
-        max-height: none;
-        object-fit: contain;
-        width: 100%;
-        height: auto;
-      }
-
+      .grid { display: flex; flex-direction: column; align-items: stretch; }
+      .grid > div:first-child { width: 100%; }
+      .poster-img { max-height: none; object-fit: contain; width: 100%; height: auto; }
       .text-block { min-height: auto; }
     }
   </style>
 </head>
-<body class="bg-white text-black font-sans">
+
+<body class="bg-white text-black font-kodchasan-semibold" style="visibility:hidden;">
   
-<header class="fixed h-[12%] top-0 left-0 w-full py-4 px-6 z-20 bg-white backdrop-blur-md">
+  <!-- Header / Navbar -->
+  <header id="site-header" class="fixed h-[12%] top-0 left-0 w-full py-4 px-6 z-20 bg-white backdrop-blur-md">
     <div class="flex justify-between items-center animate-slide-up [animation-delay:0.2s]">
-      <h1 class="text-2xl md:text-3xl font-kodchasan font-bold">
+      <h1 class="text-2xl md:text-3xl font-kodchasan-bold">
         <a href="index.html" class="no-underline">VIOLET Z</a>
       </h1>
 
@@ -117,17 +109,19 @@
       <button id="menu-btn" class="md:hidden text-2xl focus:outline-none">☰</button>
 
       <!-- Nav links -->
-      <nav id="menu" class="border border-1 border-black hidden md:block absolute md:static right-6 top-16 md:top-0 bg-white md:bg-transparent backdrop-blur-md md:backdrop-blur-none rounded-lg md:rounded-none shadow-lg md:shadow-none p-4 md:p-0 z-30">
-        <ul class="flex flex-col md:flex-row md:space-x-6 text-sm font-kodchasan font-medium">
-          <li><a href="gallery.html" class="block py-2 px-3 rounded-md hover:bg-green-50 hover:underline">Gallery</a></li>
-          <li><a href="filmtv.html" class="block py-2 px-3 rounded-md hover:bg-green-50 hover:underline">Film &amp; TV</a></li>
-          <li><a href="shorts.html" class="block py-2 px-3 rounded-md hover:bg-green-50 hover:underline">Shorts</a></li>
-          <li><a href="about.html" class="block py-2 px-3 rounded-md hover:bg-green-50 hover:underline">About me</a></li>
+      <nav id="menu" class="hidden md:block absolute md:static right-6 top-16 md:top-0 bg-white md:bg-transparent backdrop-blur-md md:backdrop-blur-none rounded-lg md:rounded-none shadow-lg md:shadow-none p-4 md:p-0 z-30">
+        <ul class="flex flex-col md:flex-row md:space-x-6 text-sm font-kodchasan-semibold">
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="filmtv.html">Film &amp; TV</a></li>
+          <li><a href="shorts.html">Shorts</a></li>
+          <li><a href="about.html">About me</a></li>
         </ul>
       </nav>
     </div>
   </header>
-  <section class="p-10 md:p-10 pt-20 max-w-4xl mx-auto space-y-28">
+
+  <!-- Shorts Content -->
+  <section class="p-10 md:p-10 pt-28 max-w-4xl mx-auto space-y-28">
     <!-- First Short -->
     <div class="flex flex-col items-center fade-in fade-in-delay-1">
       <h3 class="short-title delay-1">UNDER THE BLACK HOLE</h3>
@@ -144,15 +138,18 @@
         <div class="md:col-span-2 flex flex-col text-gray-700 text-justify text-block mt-0">
           <div>
             <p class="role-text" style="margin-top:0">
-              <span class="role-label"><strong>Role:</strong></span> Directing, Screenplay Writing, Storyboarding
+              <span class="role-label" style="font-weight:800;"><strong>Role:</strong></span> Directing, Screenplay Writing, Storyboarding
               <span class="role-indent">Color Script and Background Design</span>
-              <span class="role-indent">Animation, Poster Design</span>
+              <span class="role-indent"> Animation, Poster Design</span>
             </p>
           </div>
-          <div class="space-y-3 mt-6 film-intro-container">
-            <p class="film-intro"><strong>Film Introduction:</strong></p>
-            <p class="film-intro">A mysterious black hole appears over the city, and people believe cleaning up a circular object can make it disappear. The main character, a staff member who cleans the circle, trembles inside because he hides the object — a Walkman.</p>
-            <p class="film-intro">This graduate project was completed with my classmates in four months during the COVID-19 pandemic in China. I defined the art style during pre-production and contributed extensively in production, including color scripting, background design, and creating the majority of key poses for the most intense action shots.</p>
+          <div class="space-y-2 mt-11 film-intro-container font-prompt-light">
+            <p class="film-intro  font-semibold text-lg"><strong>
+              Film Introduction:</strong></p>
+            <p class="film-intro ">
+              A mysterious black hole appears over the city, and people believe cleaning up a circular object can make it disappear. The main character, a staff member who cleans the circle, trembles inside because he hides the object — a Walkman.</p>
+            <p class="film-intro">
+              This graduate project was completed with my classmates in four months during the COVID-19 pandemic in China. I defined the art style during pre-production and contributed extensively in production, including color scripting, background design, and creating the majority of key poses for the most intense action shots.</p>
           </div>
         </div>
       </div>
@@ -171,16 +168,16 @@
           <img src="images/Poster2.png" alt="GO!GET IT Poster" class="poster-img max-h-96">
         </div>
 
-        <div class="md:col-span-2 flex flex-col text-gray-700 text-justify text-block">
+        <div class="md:col-span-2 flex flex-col text-gray-950 text-justify text-block">
           <div>
             <p class="role-text" style="margin-top:0">
-              <span class="role-label"><strong>Role:</strong></span> Directing, Screenplay Writing, Storyboarding
+              <span class="role-label style="font-weight:800"><strong>Role:</strong></span> Directing, Screenplay Writing, Storyboarding
               <span class="role-indent">Color Script and Background Design</span>
               <span class="role-indent">Animation, Poster Design</span>
             </p>
           </div>
-          <div class="space-y-3 mt-6 film-intro-container">
-            <p class="film-intro"><strong>Film Introduction:</strong></p>
+          <div class="space-y-3 mt-6 film-intro-container font-prompt-light">
+            <p class="film-intro font-semibold text-lg"><strong>Film Introduction:</strong></p>
             <p class="film-intro">This work tells the story of the friendship between the protagonist and her three-legged dog. They were inseparable during childhood, but as the protagonist grew up, they gradually drifted apart. When she finally reflects on their bond, she faces the reality of her dog aging and having only a limited time left.</p>
             <p class="film-intro">This animated short was completed during COVID with two friends at the Communication University of China. Due to lockdown restrictions, all communication and production were carried out entirely online.</p>
           </div>
@@ -189,17 +186,45 @@
     </div>
   </section>
 
+  <!-- Footer -->
   <footer class="p-6 text-center text-gray-500 text-sm fade-in fade-in-delay-3">
     © 2025 VIOLET Z. All Rights Reserved.
   </footer>
-</body>
-<script>
+
+  <script>
+    // Mobile menu toggle
     const menuBtn = document.getElementById('menu-btn');
     const menu = document.getElementById('menu');
+    const header = document.getElementById('site-header');
+    const mainContent = document.querySelector('section');
 
     menuBtn.addEventListener('click', () => {
       menu.classList.toggle('hidden');
-      menu.classList.toggle('animate-fade-in');
+      if (!menu.classList.contains('hidden')) {
+        menu.classList.remove('animate-slide-down');
+        void menu.offsetWidth;
+        menu.classList.add('animate-slide-down');
+
+        const links = menu.querySelectorAll('a');
+        links.forEach((link, i) => {
+          link.classList.remove('slide-up');
+          void link.offsetWidth;
+          link.style.animationDelay = `${0.1 * i}s`;
+          link.classList.add('slide-up');
+        });
+      }
     });
+
+    // Font visibility fix
+    document.fonts.load('1em "Kodchasan"').then(() => { document.body.style.visibility='visible'; });
+    document.fonts.load('1em "Grape Nuts"').then(() => { document.querySelectorAll('.font-grape').forEach(el=>el.style.visibility='visible'); });
+
+    // Dynamic top padding based on header
+    function updateMainPadding() {
+      mainContent.style.paddingTop = header.offsetHeight + 'px';
+    }
+    window.addEventListener('load', updateMainPadding);
+    window.addEventListener('resize', updateMainPadding);
   </script>
+</body>
 </html>

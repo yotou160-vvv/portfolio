@@ -6,68 +6,107 @@
   <title>Gallery — Your Portfolio</title>
 
   <!-- Tailwind -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-  <!-- Fonts -->
+  <!-- Preload Kodchasan & Poppins fonts -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Kodchasan:wght@600;700&family=Poppins:wght@300;400&display=swap" as="style">
+
+  <!-- Load Kodchasan & Poppins fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kodchasan:wght@500;600;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kodchasan:wght@600;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
-  <!-- Tailwind Config -->
-  <!-- 先放 config（全局变量），CDN 加载时会读取 -->
-  <script>
-    window.tailwind = {
-      config: {
-        theme: {
-          extend: {
-            fontFamily: {
-              kodchasan: ['Kodchasan', 'sans-serif'],
-              poppins: ['Poppins', 'sans-serif'],
-            },
-            keyframes: {
-              fadeIn: {
-                '0%': { opacity: '0', transform: 'translateY(20px)' },
-                '100%': { opacity: '1', transform: 'translateY(0)' },
-              },
-              slideUp: {
-                '0%': { opacity: '0', transform: 'translateY(20px)' },
-                '100%': { opacity: '1', transform: 'translateY(0)' },
-              },
-            },
-            animation: {
-              'fade-in': 'fadeIn 0.7s ease-out forwards',
-              'slide-up': 'slideUp 0.7s ease-out forwards',
-            },
-            boxShadow: {
-              'hero-text': '2px 2px 6px rgba(0,0,0,0.6)',
-              'hero-p': '1px 1px 4px rgba(0,0,0,0.5)',
-            },
-          },
-        },
+  <!-- Font classes -->
+  <style>
+    /* Hide body initially to prevent flash */
+    body { visibility: hidden; }
+
+    .font-kodchasan-bold { font-family: "Kodchasan", sans-serif; font-weight: 700; }
+    .font-kodchasan-semibold { font-family: "Kodchasan", sans-serif; font-weight: 600; }
+    .font-kodchasan-light { font-family: "Kodchasan", sans-serif; font-weight: 300; }
+
+
+    /* Fade-in animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { opacity: 0; animation: fadeIn 0.7s ease-out forwards; }
+    .fade-in-delay-1 { animation-delay: 0.2s; }
+    .fade-in-delay-2 { animation-delay: 0.4s; }
+    .fade-in-delay-3 { animation-delay: 0.6s; }
+
+    /* Slide-up animation for navbar / hero / mobile links */
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .slide-up { opacity: 0; animation: slideUp 0.2s ease-out forwards; }
+
+    /* Slide-down animation for mobile menu */
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-slide-down { animation: slideDown 0.5s ease-out forwards; }
+
+    /* Navbar link hover: subtle gray fade + animated underline */
+    nav ul li a {
+      transition: color 0.3s ease;
+      color: #000;
+      position: relative;
+      display: inline-block;
+      padding: 0.5rem 0.75rem; /* spacing */
+    }
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: -2px;
+      width: 0;
+      height: 3px;
+      background-color: #555;
+      transform: translateX(-50%);
+      transition: width 0.3s ease;
+    }
+    nav ul li a:hover { color: #555; }
+    nav ul li a:hover::after { width: 100%; }
+
+    /* MOBILE-SPECIFIC STYLING ONLY */
+    @media (max-width: 767px) {
+      #menu { text-align: right; }
+      #menu ul { display: flex; flex-direction: column; gap: 0.5rem; }
+      #menu ul li a {
+        display: block;
+        text-align: right;
+        font-size: 1.1rem; /* bigger font for easier clicking */
+        padding: 0.75rem 1rem; /* bigger click area */
       }
     }
-  </script>
+    html, body {
+      overflow: hidden; /* no scroll at all */
+    }
 
-<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
+  </style>
 </head>
 
-<body class="bg-white text-black relative font-poppins">
+<body class="bg-white text-black relative font-poppins-light">
 
   <!-- Background video -->
-<video autoplay muted loop playsinline
+  <video autoplay muted loop playsinline
     class="fixed top-[10%] left-0 w-full h-[calc(100vh-4rem)] object-cover object-top -z-10">
     <source src="images/myvideo.mp4" type="video/mp4">
     <source src="images/myvideo.webm" type="video/webm">
     Your browser does not support the video tag.
-</video>
+  </video>
 
   <!-- Video overlay -->
   <div class="fixed top-[10%] left-0 w-full h-[calc(100vh-4rem)] bg-gradient-to-t from-[rgba(4,3,3,0.93)] via-[rgba(4,3,3,0.8)] to-[rgba(0,0,0,0.06)] -z-0 pointer-events-none"></div>
 
   <!-- Navigation bar -->
-  <header class="fixed h-[12%] top-0 left-0 w-full py-4 px-6 z-20 bg-white backdrop-blur-md">
-    <div class="flex justify-between items-center animate-slide-up [animation-delay:0.2s]">
-      <h1 class="text-2xl md:text-3xl font-kodchasan font-bold">
+  <header class="fixed h-[10%] top-0 left-0 w-full py-4 px-6 z-20 bg-white backdrop-blur-md">
+    <div class="flex justify-between items-center">
+      <h1 class="text-2xl md:text-3xl font-kodchasan-bold">
         <a href="index.html" class="no-underline">VIOLET Z</a>
       </h1>
 
@@ -75,45 +114,71 @@
       <button id="menu-btn" class="md:hidden text-2xl focus:outline-none">☰</button>
 
       <!-- Nav links -->
-      <nav id="menu" class="border border-1 border-black hidden md:block absolute md:static right-6 top-16 md:top-0 bg-white md:bg-transparent backdrop-blur-md md:backdrop-blur-none rounded-lg md:rounded-none shadow-lg md:shadow-none p-4 md:p-0 z-30">
-        <ul class="flex flex-col md:flex-row md:space-x-6 text-sm font-kodchasan font-medium">
-          <li><a href="gallery.html" class="block py-2 px-3 rounded-md hover:bg-green-50 hover:underline">Gallery</a></li>
-          <li><a href="filmtv.html" class="block py-2 px-3 rounded-md hover:bg-green-50 hover:underline">Film &amp; TV</a></li>
-          <li><a href="shorts.html" class="block py-2 px-3 rounded-md hover:bg-green-50 hover:underline">Shorts</a></li>
-          <li><a href="about.html" class="block py-2 px-3 rounded-md hover:bg-green-50 hover:underline">About me</a></li>
+      <nav id="menu" class="hidden md:block absolute md:static right-6 top-16 md:top-0 bg-white md:bg-transparent backdrop-blur-md md:backdrop-blur-none rounded-lg md:rounded-none shadow-lg md:shadow-none p-4 md:p-0 z-30">
+        <ul class="flex flex-col md:flex-row md:space-x-6 text-sm font-kodchasan-semibold">
+          <li><a href="gallery.html" class="focus:outline-none">Gallery</a></li>
+          <li><a href="filmtv.html" class="focus:outline-none">Film &amp; TV</a></li>
+          <li><a href="shorts.html" class="focus:outline-none">Shorts</a></li>
+          <li><a href="about.html" class="focus:outline-none">About me</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- JS for Mobile Dropdown -->
+  <!-- JS for Mobile Dropdown with slide-down & slide-up links -->
   <script>
     const menuBtn = document.getElementById('menu-btn');
     const menu = document.getElementById('menu');
 
     menuBtn.addEventListener('click', () => {
       menu.classList.toggle('hidden');
-      menu.classList.toggle('animate-fade-in');
+
+      if (!menu.classList.contains('hidden')) {
+        // restart menu slide-down animation
+        menu.classList.remove('animate-slide-down');
+        void menu.offsetWidth;
+        menu.classList.add('animate-slide-down');
+
+        // animate mobile links individually with slide-up
+        const links = menu.querySelectorAll('a');
+        links.forEach((link, i) => {
+          link.classList.remove('slide-up');
+          void link.offsetWidth; // trigger reflow
+          link.style.animationDelay = `${0.1 * i}s`;
+          link.classList.add('slide-up');
+        });
+      }
     });
   </script>
 
   <!-- Hero -->
-  <section class="flex flex-col items-center text-center justify-center h-[90vh] pt-32 md:pt-0 px-4 relative z-10 animate-fade-in [animation-delay:0.4s]">
-    <h2 class="text-3xl md:text-5xl mb-6 text-white font-kodchasan font-bold drop-shadow-[2px_2px_6px_rgba(0,0,0,0.6)]">
+  <section class="flex flex-col items-center text-center justify-center h-[90vh] pt-32 md:pt-0 px-4 relative z-10 fade-in fade-in-delay-2">
+    <h2 class="text-3xl md:text-5xl mb-6 text-white font-kodchasan-bold drop-shadow-[2px_2px_6px_rgba(0,0,0,0.6)] fade-in fade-in-delay-2">
       Hello, I’m Violet Zhang
     </h2>
-    <p class="text-lg md:text-xl text-gray-100 max-w-2xl leading-relaxed font-kodchasan font-semibold drop-shadow-[1px_1px_4px_rgba(0,0,0,0.5)] animate-fade-in [animation-delay:0.6s]">
+    <p class="text-lg md:text-xl text-gray-100 max-w-2xl leading-relaxed font-kodchasan-semibold drop-shadow-[1px_1px_4px_rgba(0,0,0,0.5)] fade-in fade-in-delay-3">
       Welcome to my portfolio
     </p>
-    <p class="text-lg md:text-xl text-gray-100 max-w-2xl leading-relaxed mt-2 font-kodchasan font-semibold drop-shadow-[1px_1px_4px_rgba(0,0,0,0.5)] animate-fade-in [animation-delay:0.8s]">
+    <p class="text-lg md:text-xl text-gray-100 max-w-2xl leading-relaxed mt-2 font-kodchasan-semibold drop-shadow-[1px_1px_4px_rgba(0,0,0,0.5)] fade-in fade-in-delay-3">
       I love creating light and colors that tell stories.
+    </p>
+    <!-- New line for mobile: Desktop view recommendation -->
+    <p class="text-sm text-gray-200 mt-6 font-kodchasan-semibold md:hidden fade-in fade-in-delay-3">
+      Desktop view is recommended
     </p>
   </section>
 
   <!-- Footer -->
-  <footer class="p-6 text-center text-gray-500 text-sm relative z-10 font-poppins font-light animate-fade-in [animation-delay:1s]">
+  <footer class="p-6 text-center text-gray-500 text-sm relative z-10 font-kodchasan-light fade-in fade-in-delay-3">
     © 2025 Violet Zhang. All Rights Reserved.
   </footer>
+
+  <!-- Font-load visibility fix -->
+  <script>
+    document.fonts.ready.then(() => {
+      document.body.style.visibility = 'visible';
+    });
+  </script>
 
 </body>
 </html>
